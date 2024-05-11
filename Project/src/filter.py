@@ -1,15 +1,15 @@
-from src.helpers.validators import valores_permitidos_filter as verifier
+from src.helpers.args_validator import args_verifier
 
 validateParams = {
-    "time_range": ["Y", "M", "D"], 
-    "filter": ["asesor", "modelo", "financiera", "clasificacion"], 
-    "values": ["cantidad", "costo"], 
-    "order_by": ["llave", "valor"],
+    'time_range': ['Y', 'M', 'D'], 
+    'filter': ['asesor', 'modelo', 'financiera', 'clasificacion'], 
+    'values': ['cantidad', 'costo'], 
+    'order_by': ['llave', 'valor'],
 }
-@verifier(validateParams)
+@args_verifier(validateParams)
 def filter_data(
     data_path: str = ..., 
-    time_range: str = ..., 
+    time_range: str = ...,
     filter: str = ...,
     values: str = ...,
     invert: bool = False,
@@ -24,8 +24,7 @@ def filter_data(
     sorted by `{order_by}` {'desc' if desc else 'asc'}
     with time `{time_range}`
     with {'accum' if accum else 'no accum'}
-    with {'inverted' if invert else 'normal'} orientation
-    """)
+    with {'inverted' if invert else 'normal'} orientation""")
 
     filtered_data = {}
     selected_datetime = ['Y','M','D'].index(time_range)

@@ -27,7 +27,7 @@ def prepare_data() -> None:
     filtered_data=filter.filter_data(
         data_path=MD+'/assets/data_cleaned.csv',
         time_range='Y', # [Y, M, D]
-        filter='asesor', # [asesor, modelo, financiera, clasificacion]
+        filter='modelo', # [asesor, modelo, financiera, clasificacion]
         values='cantidad', # [cantidad, costo]
         order_by='valor', # [llave, valor]
         desc=True,
