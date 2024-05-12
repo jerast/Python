@@ -1,4 +1,5 @@
 import sys
+import pandas
 from src import connection, cleaner, filter
 
 
@@ -7,7 +8,8 @@ MD = sys.path[0]
 def main() -> None:
     prepare_data()
 
-    print('Done!')
+    data = pandas.read_csv(MD+'/assets/Index2018.csv')
+    print(data.head())
 
 def prepare_data() -> None:
     print('Preparing Data...')
