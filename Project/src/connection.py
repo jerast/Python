@@ -20,12 +20,12 @@ def get_data(
     ### Excecute query with pandas
     query = pandas.read_sql_query(
         get_query_from_file(sql_path),
-        connection
+        connection,
     )
 
     ### Get query data and save in .CSV file
     results = pandas.DataFrame(query)
-    results.to_csv(save_path, index=True, header=True)
+    results.to_csv(save_path, index=False, header=True, sep=";")
 
 def get_query_from_file(file_path):
     with open(file_path) as file:

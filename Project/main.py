@@ -1,15 +1,16 @@
 import sys
-from src import connection, cleanner, filter, export
+from src import connection, cleaner, filter
+
 
 MD = sys.path[0]
 
 def main() -> None:
     prepare_data()
 
-    print('\nDone!\n')
+    print('Done!')
 
 def prepare_data() -> None:
-    print('\nPreparing Data...\n')
+    print('Preparing Data...')
     
     ### Getting data from DB
     connection.get_data(
@@ -18,27 +19,22 @@ def prepare_data() -> None:
     )
 
     ### Cleaning data
-    cleanner.clean_data(
+    cleaner.clean_data(
         data_path=MD+'/assets/data.csv',
         save_path=MD+'/assets/data_cleaned.csv'
     )
 
     ### Filtering data
-    filtered_data=filter.filter_data(
+    filter.filter_data(
         data_path=MD+'/assets/data_cleaned.csv',
+        save_path=MD+'/assets/filter.json',
         time_range='Y', # [Y, M, D]
-        filter='modelo', # [asesor, modelo, financiera, clasificacion]
-        values='cantidad', # [cantidad, costo]
-        order_by='valor', # [llave, valor]
+        filter='des_modelo', # [nom_asesor, des_modelo, financiera, clasificacion]
+        values='costo', # [cantidad, costo]
+        order_by='values', # [keys, values]
         desc=True,
         accum=True,
         invert=False,
     )
-        
-    ### Exporting filtered data
-    export.export_filter_data(
-        filtered_data=filtered_data,
-        export_path=MD+'/assets/filter.json'
-    )
-
+ 
 main()
