@@ -18,14 +18,14 @@ def get_data(
     warnings.filterwarnings('ignore', category=UserWarning)
 
     ### Excecute query with pandas
-    query = pandas.read_sql_query(
-        get_query_from_file(sql_path),
-        connection,
+    query_results = pandas.read_sql_query(
+        sql=get_query_from_file(sql_path), 
+        con=connection
     )
 
     ### Get query data and save in .CSV file
-    results = pandas.DataFrame(query)
-    results.to_csv(save_path, index=False, header=True, sep=";")
+    data = pandas.DataFrame(query_results)
+    data.to_csv(save_path, index=False, header=True, sep=";")
 
 def get_query_from_file(file_path):
     with open(file_path) as file:
