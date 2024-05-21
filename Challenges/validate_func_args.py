@@ -18,15 +18,12 @@ def options_verifier(args_valid_options: list[list]):
       return validateParamsWrapper
    return decorator
 
-
-validateParams = {
+@options_verifier({
    'time_range': ['Y', 'M', 'D'], 
    'filter': ['asesor', 'modelo', 'financiera', 'clasificacion'], 
    'values': ['cantidad', 'costo'], 
    'order_by': ['llave', 'valor'],
-}
-
-@options_verifier(validateParams)
+})
 def filter_data(
    data_path: str = ..., 
    time_range: str = ..., 
