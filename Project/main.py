@@ -1,22 +1,32 @@
 import sys
+import os
+import pandas
+import numpy
+import matplotlib
+import matplotlib.pyplot as pyplot
+import seaborn
 from src import connection, cleaner, filter
 
 
 MD = sys.path[0]
 
 def main() -> None:
-    prepare_data()
+    os.system('clear')
+    
+    prepare_data(fetched=True)
 
-    print('Done!')
+def prepare_data(
+    fetched: bool = True
+) -> None:
 
-def prepare_data() -> None:
     print('Preparing Data...')
     
     ### Getting data from DB
-    connection.get_data(
-        sql_path=MD+'/assets/query.sql',
-        save_path=MD+'/assets/data.csv'
-    )
+    if not fetched:
+        connection.get_data(
+            sql_path=MD+'/assets/query.sql',
+            save_path=MD+'/assets/data.csv'
+        )
 
     ### Cleaning data
     cleaner.clean_data(
@@ -27,14 +37,10 @@ def prepare_data() -> None:
     ### Filtering data
     filter.filter_data(
         data_path=MD+'/assets/data_cleaned.csv',
-        save_path=MD+'/assets/filter.json',
-        time_range='Y', # [Y, M, D]
-        filter='des_modelo', # [nom_asesor, des_modelo, financiera, clasificacion]
-        values='costo', # [cantidad, costo]
-        order_by='values', # [keys, values]
-        desc=True,
-        accum=True,
-        invert=False,
+        save_path=MD+'/assets/data_filtered.csv',
+        time_range='D', # [Y, M, D]
+        filter='modelo', # [asesor, modelo, clasificacion]
+        values='cantidad' # [cantidad, costo]
     )
  
 main()
