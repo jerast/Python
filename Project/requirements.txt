@@ -1,5 +1,7 @@
 ## MSSQL Driver
 pyodbc==5.1.0
+sqlalchemy==2.0.30
+greenlet==3.0.3
 
 ## Dotenv for environment variables
 python-dotenv==1.0.1
